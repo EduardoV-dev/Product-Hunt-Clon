@@ -1,0 +1,20 @@
+.container {
+  max-width: 800px;
+  margin: 3rem auto;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.headline {
+  font-size: 2.3rem;
+  font-family: 'PT Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  text-align: center;
+}
+
+.form {
+  width: 37.5rem;
+  margin-top: 2rem;
+}

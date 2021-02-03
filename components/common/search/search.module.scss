@@ -1,0 +1,11 @@
+.group {
+  display: flex;
+  flex-flow: row wrap;
+  border: 1px solid #e1e1e1;
+  margin-right: 2rem;
+  max-width: 20rem;
+}
+
+.button {
+  border: none;
+}

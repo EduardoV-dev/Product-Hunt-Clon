@@ -1,0 +1,17 @@
+.formGroup {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  &_label {
+    flex-basis: 30%;
+    font-size: 1.2rem;
+    font-family: 'PT Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  &_input {
+    flex: 1;
+    border: 1px solid #555;
+  }
+}

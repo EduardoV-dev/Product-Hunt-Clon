@@ -1,0 +1,60 @@
+.product {
+  background-color: #fff;
+  width: 100%;
+  min-height: 15rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  font-family: 'PT Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-bottom: 1px solid #e1e1e1;
+
+  &_data {
+    display: flex;
+  }
+
+  &_info {
+    flex: 0 0 70%;
+    margin-left: 1.5rem;
+  }
+
+  &_user {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  &_description {
+    max-width: 80%;
+    text-align: justify;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  &_comments {
+    max-width: 180px;
+    border: 1px solid #e1e1e1;
+    padding: 0.5rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &_voting {
+    border: 1px solid #e1e1e1;
+    width: 130px;
+    height: 100px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-items: center;
+    transition: all 0.3s ease-out;
+
+    &:hover {
+      background-color: #e1e1e1;
+      cursor: pointer;
+    }
+  }
+}
