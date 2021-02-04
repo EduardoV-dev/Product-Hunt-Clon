@@ -7,8 +7,8 @@ import {
   saveErrorsAction,
   saveLoadingAction
 } from '../../reducer/authReducer/actions';
-import { trimFields } from '../../../utils/hooks/useAuth';
 import { useRouter } from 'next/router';
+import { trimFields } from '../../../utils/hooks/useAuth';
 import { logOut } from '../../../services/api/auth';
 
 const authContext = createContext();
@@ -23,26 +23,32 @@ const AuthProvider = ({ children }) => {
   }
 
   const router = useRouter();
-
   const [state, dispatch] = useReducer(authReducer, initialState);
-
   const { errors, user, loading } = state;
 
   // Will handle the authentication credentials for signup or login
   // then will be used for creating an account or login into one
-  const handleOnSubmit = (e, authCredentials, submitEvent, validation, cleanFields) => {
-    preventDefault(e);
-    const credentials = trimFields(authCredentials);
-    const errors = validation(credentials);
+  const handleOnSubmit = (e, authCredentials, submitEvent, validation) =>
+    new Promise(async (resolve, reject) => {
+      preventDefault(e);
+      const credentials = trimFields(authCredentials);
+      const errors = validation(credentials);
 
-    if (JSON.stringify(errors) !== '{}')
-      return dispatch(saveErrorsAction(errors));
+      if (JSON.stringify(errors) !== '{}')
+        return dispatch(saveErrorsAction(errors));
 
-    dispatch(saveErrorsAction({}));
-    submitEvent(credentials);
-    cleanFields();
-    router.push('/');
-  }
+      dispatch(saveErrorsAction({}));
+
+      try {
+        await submitEvent(credentials, dispatch);
+        resolve();
+      } catch (e) {
+        console.log(e);
+        dispatch(saveErrorsAction({ authIssue: e }));
+        reject('Error on Auth Event');
+      }
+    });
+
 
   const handleAuthState = () =>
     auth.onAuthStateChanged(user => {
@@ -50,10 +56,13 @@ const AuthProvider = ({ children }) => {
       dispatch(saveLoadingAction(false));
     });
 
-  const logout = () => {
+  const handleLogout = () => {
     logOut();
     router.push('/ingresar');
   }
+
+  const handleClearErrorsLog = () =>
+    dispatch(saveErrorsAction({}));
 
   useEffect(() => {
     handleAuthState();
@@ -62,9 +71,11 @@ const AuthProvider = ({ children }) => {
   const contextValues = {
     errors,
     user,
+    loading,
     handleOnSubmit,
     handleAuthState,
-    logout
+    handleLogout,
+    handleClearErrorsLog,
   }
 
   return (

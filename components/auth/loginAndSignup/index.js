@@ -3,6 +3,7 @@ import { withAuth } from '../../HOC';
 import { Button, FormGroup } from '../../ui';
 import { Error } from '../index';
 import s from './loginAndSignup.module.scss';
+import { useRouter } from 'next/router';
 import { useAuth } from '../../../hooks/context/authContext';
 
 const LoginAndSignUp = ({
@@ -15,9 +16,17 @@ const LoginAndSignUp = ({
 }) => {
   const { errors, handleOnSubmit } = useAuth();
   const { username, email, password } = authCredentials;
+  const router = useRouter();
 
-  const handleLocalSubmit = e =>
-    handleOnSubmit(e, authCredentials, submitEvent, validation, handleCleanFields);
+  const handleLocalSubmit = async e => {
+    try {
+      await handleOnSubmit(e, authCredentials, submitEvent, validation);
+      handleCleanFields();
+      router.push('/');
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
     <div className={s.container}>
@@ -64,6 +73,9 @@ const LoginAndSignUp = ({
         />
         {errors.password && (
           <Error message={errors.password} />
+        )}
+        {errors.authIssue && (
+          <Error message={errors.authIssue} />
         )}
         <Button
           type='submit'

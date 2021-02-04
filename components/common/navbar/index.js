@@ -6,7 +6,7 @@ import s from './navbar.module.scss';
 import { useAuth } from '../../../hooks/context/authContext';
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
+  const { user, handleLogout } = useAuth();
 
   return (
     <nav className={s.nav}>
@@ -50,10 +50,10 @@ const Navbar = () => {
           </>
         ) : (
             <>
-              <p className={s.nav_user}>Bienvenido Eduardo</p>
+              <p className={s.nav_user}>{user.displayName}</p>
               <Button
                 variant='primary'
-                onClick={logout}
+                onClick={handleLogout}
               >Cerrar Sesión</Button>
             </>
           )}
