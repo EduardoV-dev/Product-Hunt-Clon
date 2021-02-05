@@ -24,10 +24,13 @@ export const logIntoAccount = user =>
     }
   });
 
-export const logOut = async () => {
-  try {
-    await auth.signOut();
-  } catch (e) {
-    console.log(e);
-  }
-}
+export const logOut = async () => 
+  new Promise(async (resolve, reject) => {
+    try {
+      auth.signOut();
+      resolve();
+    } catch (e) {
+      console.log(e);
+      reject('Error al cerrar sesión');
+    }
+  });

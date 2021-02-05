@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withAuth } from '../../HOC';
 import { Button, FormGroup } from '../../ui';
 import { Error } from '../index';
@@ -10,9 +10,9 @@ const LoginAndSignUp = ({
   loginAuth,
   authCredentials,
   handleOnChange,
-  handleCleanFields,
   submitEvent,
   validation,
+  handleClearErrorsLog,
 }) => {
   const { errors, handleOnSubmit } = useAuth();
   const { username, email, password } = authCredentials;
@@ -21,12 +21,14 @@ const LoginAndSignUp = ({
   const handleLocalSubmit = async e => {
     try {
       await handleOnSubmit(e, authCredentials, submitEvent, validation);
-      handleCleanFields();
       router.push('/');
     } catch (e) {
       console.log(e);
     }
   }
+
+  // eslint-disable-next-line
+  useEffect(() => handleClearErrorsLog(), []);
 
   return (
     <div className={s.container}>

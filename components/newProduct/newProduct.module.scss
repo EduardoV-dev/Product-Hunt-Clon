@@ -1,0 +1,47 @@
+.product {
+  &_heading {
+    margin: 3rem auto;
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Roboto Slab', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  &_fieldset {
+    padding: 1rem;
+    border: 1px solid #dddddd;
+    margin-bottom: 1rem;
+  }
+
+  &_legend {
+    font-family: 'Roboto Slab', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+  }
+
+  &_form {
+    margin: 0 auto;
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+
+  &_formGroup {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &_label {
+    font-family: 'PT Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
+    flex: 0 0 30%;
+  }
+
+  &_textarea {
+    font-family: 'PT Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    flex: 1;
+    padding: 0.5rem;
+    max-height: 300px;
+    min-height: 200px;
+  }
+}

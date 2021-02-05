@@ -22,7 +22,7 @@ const Product = () => {
             <CommentaryIcon />
             <p className={s.product_comments_quantity}>
               125 Comentarios
-              </p>
+            </p>
           </div>
           <p className={s.product_time}>
             Publicado hace: 3 días

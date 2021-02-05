@@ -5,11 +5,13 @@ import {
   logIntoAccount
 } from '../../../services/api/auth';
 import { handleValidation } from '../../../utils/hooks/useAuth';
+import { useAuth as authContext } from '../../../hooks/context/authContext';
 
 const withAuth = Component => props => {
   const { loginAuth } = props;
+  const { handleClearErrorsLog } = authContext();
 
-  const { authCredentials, handleOnChange, handleCleanFields } = useAuth({
+  const { authCredentials, handleOnChange } = useAuth({
     username: '',
     email: '',
     password: ''
@@ -26,9 +28,9 @@ const withAuth = Component => props => {
       {... {
         authCredentials,
         handleOnChange,
-        handleCleanFields,
         submitEvent,
         validation,
+        handleClearErrorsLog,
       }}
     />
   );

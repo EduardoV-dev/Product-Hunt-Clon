@@ -56,9 +56,13 @@ const AuthProvider = ({ children }) => {
       dispatch(saveLoadingAction(false));
     });
 
-  const handleLogout = () => {
-    logOut();
-    router.push('/ingresar');
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      router.push('/ingresar');
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   const handleClearErrorsLog = () =>

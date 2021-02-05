@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Search } from '../index';
 import { Button } from '../../ui';
@@ -23,7 +23,7 @@ const Navbar = () => {
             <a href="#!" className={s.nav_link}>Populares</a>
           </Link>
           {user && (
-            <Link href='/agregar-producto'>
+            <Link href='/nuevo-producto'>
               <a href="" className={s.nav_link}>Agregar producto</a>
             </Link>
           )}

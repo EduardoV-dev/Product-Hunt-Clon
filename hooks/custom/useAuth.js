@@ -6,10 +6,7 @@ const useAuth = initialState => {
   const handleOnChange = ({ target }) =>
     setAuthCredentials({ ...authCredentials, [target.name]: target.value });
 
-  const handleCleanFields = () =>
-    setAuthCredentials({ ...initialState });
-
-  return { authCredentials, handleOnChange, handleCleanFields };
+  return { authCredentials, handleOnChange };
 }
 
 export default useAuth;
