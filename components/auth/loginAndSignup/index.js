@@ -4,7 +4,8 @@ import { Button, FormGroup } from '../../ui';
 import { Error } from '../index';
 import s from './loginAndSignup.module.scss';
 import { useRouter } from 'next/router';
-import { useAuth } from '../../../hooks/context/authContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleOnSubmit } from '../../../redux/handlers/auth';
 
 const LoginAndSignUp = ({
   loginAuth,
@@ -14,13 +15,20 @@ const LoginAndSignUp = ({
   validation,
   handleClearErrorsLog,
 }) => {
-  const { errors, handleOnSubmit } = useAuth();
+  const { errors } = useSelector(state => state.auth);
   const { username, email, password } = authCredentials;
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const localSubmitConfig = {
+    authCredentials, 
+    submitEvent, 
+    validation,
+  }
 
   const handleLocalSubmit = async e => {
     try {
-      await handleOnSubmit(e, authCredentials, submitEvent, validation);
+      await dispatch(handleOnSubmit(e, localSubmitConfig));
       router.push('/');
     } catch (e) {
       console.log(e);
@@ -28,7 +36,7 @@ const LoginAndSignUp = ({
   }
 
   // eslint-disable-next-line
-  useEffect(() => handleClearErrorsLog(), []);
+  // useEffect(() => handleClearErrorsLog(), []);
 
   return (
     <div className={s.container}>

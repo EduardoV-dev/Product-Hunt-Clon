@@ -1,5 +1,5 @@
 import React from 'react';
-import useProduct from '../../hooks/custom/useProduct';
+import useProduct from '../../hooks/useProduct';
 import { Button, FormGroup } from '../ui';
 import s from './newProduct.module.scss';
 

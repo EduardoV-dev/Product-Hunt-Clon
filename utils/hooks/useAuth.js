@@ -4,9 +4,9 @@ export const trimFields = values => ({
   password: values.password.trim(),
 });
 
-export const handleValidation = type => (values) => {
-  if (JSON.stringify(values) === '{}') return null;
-  const { username, email, password } = values;
+export const handleValidation = type => (credentials) => {
+  if (JSON.stringify(credentials) === '{}') return null;
+  const { username, email, password } = credentials;
   const errors = {};
 
   switch (type) {
@@ -44,5 +44,5 @@ export const handleValidation = type => (values) => {
       break;
   }
 
-  return errors;
+  return { errors, credentials };
 }

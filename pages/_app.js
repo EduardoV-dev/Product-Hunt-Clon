@@ -1,5 +1,7 @@
 import Head from 'next/head';
-import AuthProvider from '../hooks/context/authContext';
+import { Provider } from 'react-redux';
+import { createWrapper } from 'next-redux-wrapper';
+import store from '../redux';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -11,11 +13,13 @@ function MyApp({ Component, pageProps }) {
         <script src="https://kit.fontawesome.com/40db8b5196.js" crossOrigin="anonymous"></script>
         <meta charSet='UTF-8' />
       </Head>
-      <AuthProvider>
+      <Provider store={store}>
         <Component {...pageProps} />
-      </AuthProvider>
+      </Provider>
     </>
   )
 }
 
-export default MyApp;
+const makeStore = () => store;
+const wrapper = createWrapper(makeStore);
+export default wrapper.withRedux(MyApp);

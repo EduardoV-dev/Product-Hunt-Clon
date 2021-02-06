@@ -1,14 +1,16 @@
 import React from 'react';
-import { withPrivateRoute } from '../components/HOC';
 import { Layout } from '../components/common';
 import { LoginAndSignup } from '../components/auth';
+import { withPrivateRoute } from '../components/HOC';
 
-const LoginPage = () => (
-  <Layout>
-    <LoginAndSignup
-      loginAuth
-    />
-  </Layout>
-);
+const LoginPage = () => {
+  return (
+    <Layout>
+      <LoginAndSignup
+        loginAuth
+      />
+    </Layout>
+  );
+}
 
 export default withPrivateRoute(LoginPage);

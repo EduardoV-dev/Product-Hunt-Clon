@@ -1,20 +1,34 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useAuth } from '../../../hooks/context/authContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { handleAuthState } from '../../../redux/handlers/auth';
 
 const withPrivateRoute = Component => props => {
-  const { user } = useAuth();
-  const router = useRouter();
+  const { user, loading } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+
+  const { pathname, push } = useRouter();
+
+  const handleRoutes = () => {
+    if (loading) return;
+
+    if (user && (pathname === '/ingresar' || pathname === '/registrarse')) 
+      return push('/');
+    if (!user && pathname === '/nuevo-producto')
+      return push('/ingresar');
+  }
 
   useEffect(() => {
-    if (user) {
-      router.push('/');
-      return null;
-    }
-  }, [user]);
+    if (loading) dispatch(handleAuthState());
+    handleRoutes();
+  }, [user, loading]);
 
   return (
-    <Component {...props} />
+    <>
+      {!loading && (
+        <Component {...props} />
+      )}
+    </>
   )
 }
 

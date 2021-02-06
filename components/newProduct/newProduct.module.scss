@@ -3,7 +3,7 @@
     margin: 3rem auto;
     text-align: center;
     font-size: 2rem;
-    font-family: 'Roboto Slab', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Roboto Slab", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   }
 
   &_fieldset {
@@ -13,7 +13,7 @@
   }
 
   &_legend {
-    font-family: 'Roboto Slab', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Roboto Slab", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1rem;
   }
 
@@ -31,17 +31,21 @@
   }
 
   &_label {
-    font-family: 'PT Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "PT Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1.2rem;
     flex: 0 0 30%;
   }
 
   &_textarea {
-    font-family: 'PT Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "PT Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1rem;
     flex: 1;
     padding: 0.5rem;
     max-height: 300px;
     min-height: 200px;
+
+    &:focus {
+      box-shadow: 0px 0px 0px 2px #a9a9a9;
+    }
   }
 }

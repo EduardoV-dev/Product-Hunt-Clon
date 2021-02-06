@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from '../components/common';
 import { ProductsList } from '../components/homeAndPopular';
+import { withPrivateRoute } from '../components/HOC';
 
 const Home = () => {
   return (  
@@ -10,4 +11,4 @@ const Home = () => {
   );
 }
  
-export default Home;
+export default withPrivateRoute(Home);

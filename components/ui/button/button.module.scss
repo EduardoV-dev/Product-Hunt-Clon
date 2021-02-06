@@ -16,18 +16,30 @@
   &_primary {
     background-color: #da552f;
     color: #f2f2f2;
-
-    &:hover {
+    
+    &:hover,
+    &:focus {
       background-color: #be4423;
     }
+    
+    &:active {
+      background-color: #b14122;
+      box-shadow: 0 0 0 4px #ddd;
+    }
+
   }
 
   &_secondary {
     border: 1px solid #e1e1e1;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: #e1e1e1;
       color: #333;
+    }
+
+    &:active {
+      border: 2px solid #c2c2c2;
     }
   }
 }

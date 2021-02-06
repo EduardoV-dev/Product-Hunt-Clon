@@ -3,10 +3,22 @@ import Link from 'next/link';
 import { Search } from '../index';
 import { Button } from '../../ui';
 import s from './navbar.module.scss';
-import { useAuth } from '../../../hooks/context/authContext';
+import { useSelector } from 'react-redux';
+import { handleLogout } from '../../../redux/handlers/auth';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
-  const { user, handleLogout } = useAuth();
+  const { user, loading } = useSelector(state => state.auth);
+  const router = useRouter();
+
+  const logout = async () => {
+    try {
+      await handleLogout();
+      router.push('/ingresar');
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
     <nav className={s.nav}>
@@ -30,7 +42,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className={s.nav_actions}>
-        {!user ? (
+        {(!user && !loading) ? (
           <>
             <Button
               variant='primary'
@@ -50,11 +62,15 @@ const Navbar = () => {
           </>
         ) : (
             <>
-              <p className={s.nav_user}>{user.displayName}</p>
-              <Button
-                variant='primary'
-                onClick={handleLogout}
-              >Cerrar Sesión</Button>
+              {!loading && (
+                <>
+                  <p className={s.nav_user}>{user.displayName}</p>
+                  <Button
+                    variant='primary'
+                    onClick={logout}
+                  >Cerrar Sesión</Button>
+                </>
+              )}
             </>
           )}
       </div>

@@ -1,10 +1,16 @@
 import {
   SAVE_ERRORS,
   SAVE_USER_STATE,
-  SAVE_LOADING
-} from './types';
+  SAVE_LOADING,
+} from '../../types/auth';
 
-const authReducer = (state, action) => {
+const initialState = {
+  errors: {},
+  user: null,
+  loading: true
+}
+
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_USER_STATE: 
       return {
