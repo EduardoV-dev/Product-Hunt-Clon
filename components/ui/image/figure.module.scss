@@ -1,6 +1,10 @@
 .figure {
   max-width: 18.75rem;
 
+  &_postInfo {
+    max-width: 40rem;
+  }
+
   &_img {
     display: block;
     width: 13rem;

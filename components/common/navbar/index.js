@@ -8,7 +8,7 @@ import { handleLogout } from '../../../redux/handlers/auth';
 import { useRouter } from 'next/router';
 
 const Navbar = () => {
-  const { user, loading } = useSelector(state => state.auth);
+  const { user } = useSelector(state => state.auth);
   const router = useRouter();
 
   const logout = async () => {
@@ -42,7 +42,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className={s.nav_actions}>
-        {(!user && !loading) ? (
+        {!user ? (
           <>
             <Button
               variant='primary'
@@ -62,20 +62,16 @@ const Navbar = () => {
           </>
         ) : (
             <>
-              {!loading && (
-                <>
-                  <p className={s.nav_user}>{user.displayName}</p>
-                  <Button
-                    variant='primary'
-                    onClick={logout}
-                  >Cerrar Sesión</Button>
-                </>
-              )}
+              <p className={s.nav_user}>{user.displayName}</p>
+              <Button
+                variant='primary'
+                onClick={logout}
+              >Cerrar Sesión</Button>
             </>
           )}
       </div>
 
-    </nav>
+    </nav >
   );
 }
 

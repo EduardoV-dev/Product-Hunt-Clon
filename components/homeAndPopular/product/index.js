@@ -4,9 +4,10 @@ import { Image } from '../../ui';
 import { CommentaryIcon } from '../../icons';
 import { formatDistanceToNow } from 'date-fns';
 import { es } from 'date-fns/locale';
+import Link from 'next/link';
 
 const Product = ({ post }) => {
-  const { product, image, description, createdAt } = post;
+  const { id, product, image, description, createdAt, comments, votes } = post;
 
   return (
     <article className={s.product}>
@@ -16,16 +17,18 @@ const Product = ({ post }) => {
           alt='Article Image'
         />
         <div className={s.product_info}>
-          <p className={s.product_user}>
-            {product}
-          </p>
+          <Link href='/post/[id]' as={`/post/${id}`}>
+            <p className={s.product_user}>
+              {product}
+            </p>
+          </Link>
           <p className={s.product_description}>
             {description}
           </p>
           <div className={s.product_comments}>
             <CommentaryIcon />
             <p className={s.product_comments_quantity}>
-              125 Comentarios
+              {comments.length} Comentarios
             </p>
           </div>
           <p className={s.product_time}>
@@ -35,7 +38,7 @@ const Product = ({ post }) => {
       </div>
       <div className={s.product_voting}>
         <span className={s.product_icon}>&#9650;</span>
-        <p className={s.product_votes}>53</p>
+        <p className={s.product_votes}>{votes.length}</p>
       </div>
     </article>
   );

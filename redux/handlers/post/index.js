@@ -1,7 +1,7 @@
 import { preventDefault, pipe } from '../../../utils/common';
 import { trimFields, handleValidation } from '../../../utils/post';
-import { createPostErrorAction, createPostSuccessAction, saveCreatePostAction, saveErrorsAction, savePostsAction } from '../../actions/post';
-import { handleCreateNewPost } from '../../../services/api/post';
+import { createPostErrorAction, createPostSuccessAction, saveCreatePostAction, saveErrorsAction, savePostsAction, saveSelectedPostAction } from '../../actions/post';
+import { handleCreateNewPost, getPostById } from '../../../services/api/post';
 import { db } from '../../../services/firebase';
 
 export const handleOnSubmit = (e, product, user) => dispatch =>
@@ -41,4 +41,10 @@ export const handleSavePosts = () => dispatch => {
 
     dispatch(savePostsAction(posts));
   });
+}
+
+export const handleSelectPost = postId => async dispatch => {
+  const post = await getPostById(postId);
+  console.log(post);
+  dispatch(saveSelectedPostAction(post));
 }

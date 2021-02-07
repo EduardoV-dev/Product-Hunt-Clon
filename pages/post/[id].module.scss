@@ -1,0 +1,13 @@
+.post {
+  &_headline {
+    text-align: center;
+    font-family: 'PT Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 3rem auto;
+  }
+
+  &_grid {
+    display: grid;
+    grid-template-areas: 
+      "postInfo postInfo postAside";
+  }
+}
