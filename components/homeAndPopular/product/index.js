@@ -2,22 +2,26 @@ import React from 'react';
 import s from './product.module.scss';
 import { Image } from '../../ui';
 import { CommentaryIcon } from '../../icons';
+import { formatDistanceToNow } from 'date-fns';
+import { es } from 'date-fns/locale';
 
-const Product = () => {
+const Product = ({ post }) => {
+  const { product, image, description, createdAt } = post;
+
   return (
     <article className={s.product}>
       <div className={s.product_data}>
         <Image
-          src='https://via.placeholder.com/300'
+          src={image}
           alt='Article Image'
         />
         <div className={s.product_info}>
           <p className={s.product_user}>
-            Eduardo
+            {product}
           </p>
           <p className={s.product_description}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui placeat fuga modi officiis possimus maxime sit doloribus sed dicta voluptas, officia odio laudantium ipsum cumque tempore nobis expedita harum eaque.
-            </p>
+            {description}
+          </p>
           <div className={s.product_comments}>
             <CommentaryIcon />
             <p className={s.product_comments_quantity}>
@@ -25,8 +29,8 @@ const Product = () => {
             </p>
           </div>
           <p className={s.product_time}>
-            Publicado hace: 3 días
-            </p>
+            Publicado hace: {formatDistanceToNow(createdAt, { locale: es })}
+          </p>
         </div>
       </div>
       <div className={s.product_voting}>

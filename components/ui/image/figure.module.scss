@@ -1,8 +1,10 @@
 .figure {
-  max-width: 12.5rem;
+  max-width: 18.75rem;
 
   &_img {
-    width: 100%;
+    display: block;
+    width: 13rem;
+    height: 12rem;
     object-fit: cover;
   }
 }

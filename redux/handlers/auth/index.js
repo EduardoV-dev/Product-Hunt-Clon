@@ -5,7 +5,7 @@ import {
   saveErrorsAction,
   saveLoadingAction
 } from '../../actions/auth';
-import { trimFields } from '../../../utils/hooks/useAuth';
+import { trimFields } from '../../../utils/auth';
 import { logOut } from '../../../services/api/auth';
 
 // Will handle the authentication credentials for signup or login

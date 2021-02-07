@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { withAuth } from '../../HOC';
 import { Button, FormGroup } from '../../ui';
-import { Error } from '../index';
+import { Error } from '../../common';
 import s from './loginAndSignup.module.scss';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +13,6 @@ const LoginAndSignUp = ({
   handleOnChange,
   submitEvent,
   validation,
-  handleClearErrorsLog,
 }) => {
   const { errors } = useSelector(state => state.auth);
   const { username, email, password } = authCredentials;
@@ -34,9 +33,6 @@ const LoginAndSignUp = ({
       console.log(e);
     }
   }
-
-  // eslint-disable-next-line
-  // useEffect(() => handleClearErrorsLog(), []);
 
   return (
     <div className={s.container}>

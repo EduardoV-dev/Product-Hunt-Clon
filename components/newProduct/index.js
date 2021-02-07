@@ -1,9 +1,17 @@
-import React from 'react';
-import useProduct from '../../hooks/useProduct';
+import React, { useEffect } from 'react';
 import { Button, FormGroup } from '../ui';
+import { Error } from '../common';
+import useProduct from '../../hooks/useProduct';
+import { handleClearErrorsLog, handleOnSubmit } from '../../redux/handlers/post';
 import s from './newProduct.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 
 const NewProduct = () => {
+  const { user } = useSelector(state => state.auth);
+  const { errors, loading } = useSelector(state => state.post);
+  const { push } = useRouter();
+  const dispatch = useDispatch();
   const { productInput, handleOnChange } = useProduct({
     product: '',
     enterprise: '',
@@ -12,12 +20,22 @@ const NewProduct = () => {
     description: '',
   });
 
-  const { product, enterprise, image, url, description } = productInput;
+  const handleLocalSubmit = async e => {
+    try {
+      await dispatch(handleOnSubmit(e, productInput, user));
+      push('/');
+    } catch (e) {
+    }
+  }
+
+  useEffect(() => dispatch(handleClearErrorsLog()),[]);
 
   return (
     <>
       <h2 className={s.product_heading}>Nuevo producto</h2>
-      <form className={s.product_form}>
+      <form className={s.product_form} noValidate
+        onSubmit={handleLocalSubmit}
+      >
         <fieldset className={s.product_fieldset}>
           <legend className={s.product_legend}>Información general</legend>
           <FormGroup
@@ -26,33 +44,42 @@ const NewProduct = () => {
             label='Nombre'
             autoComplete='off'
             name='product'
-            value={product}
             onChange={handleOnChange}
           />
+          {errors.product && (
+            <Error message={errors.product} />
+          )}
           <FormGroup
             type='text'
             placeholder='Nombre de la empresa o compañía'
             label='Empresa'
             autoComplete='off'
             name='enterprise'
-            value={enterprise}
             onChange={handleOnChange}
           />
+          {errors.enterprise && (
+            <Error message={errors.enterprise} />
+          )}
           <FormGroup
             type='file'
             label='Imagen'
             name='image'
             onChange={handleOnChange}
           />
+          {errors.image && (
+            <Error message={errors.image} />
+          )}
           <FormGroup
             type='url'
             placeholder='URL del producto'
-            label='Nombre'
+            label='URL'
             autoComplete='off'
             name='url'
-            value={url}
             onChange={handleOnChange}
           />
+          {errors.url && (
+            <Error message={errors.url} />
+          )}
         </fieldset>
         <fieldset className={s.product_fieldset}>
           <legend className={s.product_legend}>Sobre tu producto</legend>
@@ -61,18 +88,20 @@ const NewProduct = () => {
             <textarea
               className={s.product_textarea}
               name='description'
-              rows='5'
-              value={description}
               onChange={handleOnChange}
             ></textarea>
           </div>
+          {errors.description && (
+            <Error message={errors.description} />
+          )}
         </fieldset>
         <Button
           type='submit'
           variant='primary'
           block='true'
+          disabled={loading}
         >
-          Crear Producto
+          {loading ? 'Creando el producto...' : 'Crear Producto'}
         </Button>
       </form>
     </>

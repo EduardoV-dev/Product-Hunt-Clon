@@ -2,7 +2,7 @@ import React from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { createAccount, logIntoAccount } from '../../../services/api/auth';
 import { handleClearErrorsLog } from '../../../redux/handlers/auth';
-import { handleValidation } from '../../../utils/hooks/useAuth';
+import { handleValidation } from '../../../utils/auth';
 
 const withAuth = Component => props => {
   const { loginAuth } = props;

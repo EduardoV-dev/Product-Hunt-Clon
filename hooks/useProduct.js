@@ -5,7 +5,7 @@ const useProduct = initialState => {
 
   const handleOnChange = ({ target }) => {
     if (target.name === 'image') {
-      setProductInput({ ...productInput, [target.name]: target });
+      setProductInput({ ...productInput, [target.name]: target.files[0] });
     } else {
       setProductInput({ ...productInput, [target.name]: target.value });
     }
